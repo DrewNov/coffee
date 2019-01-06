@@ -3,22 +3,20 @@
     <script>
         $(function () {
             $('button').click(function () {
-                var selected = $('table').find('div.selected').eq(0).text();
+                var selected = $('table').find('div.selected').map(function () {
+                    return $(this).text();
+                }).get().join();
 
                 console.log(selected);
 
                 $.ajax({
                     url: 'https://script.google.com/macros/s/AKfycbzbkvoh1KbdTKx_VFVk_g70bCPA_Gd39X_kctru9yKWsa9QRNo/exec',
                     type: 'GET',
-                    data: {name: selected},
-                    success: function (data) {
-                        console.log('success');
-                    },
-                    error: function (data) {
-                        console.log('error');
-                    },
+                    data: {selected: selected},
+                    dataType: "jsonp",
                     complete: function (data) {
-                        console.log('complete');
+                        //result var came from responded script
+                        console.log('complete', result);
                     }
                 });
             });
