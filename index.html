@@ -9,6 +9,7 @@
 
                 console.log(selected);
 
+                window.result = false;
                 $.ajax({
                     url: 'https://script.google.com/macros/s/AKfycbzbkvoh1KbdTKx_VFVk_g70bCPA_Gd39X_kctru9yKWsa9QRNo/exec',
                     type: 'GET',
@@ -17,6 +18,11 @@
                     complete: function (data) {
                         //result var came from responded script
                         console.log('complete', result);
+                        if (window.result) {
+                            alert('Success!');
+                        } else {
+                            alert('Something went wrong!');
+                        }
                     }
                 });
             });
